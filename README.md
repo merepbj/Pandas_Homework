@@ -84,12 +84,13 @@ As final considerations:
 My Work:
 
 #Display the total number of players
-total_players = len(purchase_data_df["SN"].unique())
-
+total_players = len(purchase_data_df["SN"].value_counts())
+player_count = pd.DataFrame({"Total Players": [total_players]})
+player_count
 
 
 #Calculate the number of unique items
-item_names = len(purchase_data_df["Item Name"].unique())
+number_of_unique_items = len(purchase_data_df["Item ID"].unique())
 
 #Calculate the average price
 average_price = purchase_data_df["Price"].mean()
@@ -101,13 +102,13 @@ total_purchases = purchase_data_df["Purchase ID"].count()
 total_revenue = purchase_data_df["Price"].sum()
 
 #Create a summary frame to hold the results
-summary_df = pd.DataFrame({"Unique Items":[item_names], 
-                               "Average Item Price":[average_price], 
+summary_df = pd.DataFrame({"Number of Unique Items":[number_of_unique_items], 
+                               "Average Purchase Price":[average_price], 
                                "Total Number of Purchases":[total_purchases],
                                 "Total Revenue": [total_revenue]})
 
-#Format using currency and decimals
-summary_df.style.format({"Average Item Price": "${:,.2f}",
+# Format using currency and decimals
+summary_df.style.format({"Average Purchase Price": "${:,.2f}",
                                     "Total Number of Purchases": "${:,.2f}",
                                     "Total Revenue": "${:,.2f}"})
 
